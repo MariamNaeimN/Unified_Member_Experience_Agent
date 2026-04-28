@@ -1,0 +1,38 @@
+memberId,providerId,relationship,name,specialty,facilityName,npi,phone,state,inNetwork
+M-10042,PRV-201,PCP,Dr. Anita Patel,Family Medicine,Patel Family Medicine,1234567890,713-555-0142,TX,true
+M-10042,PRV-225,Specialist,Dr. Miguel Rivera,Endocrinology,Rivera Endocrinology,1234567899,713-555-0199,TX,true
+M-10042,PRV-301,ER,Dr. Emergency Staff,Emergency Medicine,Memorial Hermann ER,2345678901,713-555-0911,TX,true
+M-10042,PRV-302,ER,Dr. Emergency Staff,Emergency Medicine,St. Luke's ER,2345678905,713-555-0912,TX,true
+M-10043,PRV-205,PCP,Dr. Carlos Mendez,Family Medicine,Mendez Medical Group,1234567891,415-555-0198,CA,true
+M-10043,PRV-310,ER,Dr. Emergency Staff,Emergency Medicine,Kaiser Permanente ER,2345678902,415-555-0911,CA,true
+M-10044,PRV-208,PCP,Dr. Lisa Wong,Internal Medicine,Wong Internal Medicine,1234567892,212-555-0167,NY,true
+M-10044,PRV-320,Specialist,Dr. Alan Williams,Orthopedic Surgery,NYU Langone Orthopedics,2345678903,212-555-0200,NY,true
+M-10045,PRV-201,PCP,Dr. Anita Patel,Family Medicine,Patel Family Medicine,1234567890,713-555-0142,TX,true
+M-10045,PRV-343,Specialist,Dr. Laura Mitchell,OB/GYN,Texas Women's Health,2345678909,713-555-0350,TX,true
+M-10046,PRV-210,PCP,Dr. Mark Thompson,Cardiology,Baptist Heart Center,1234567893,305-555-0134,FL,true
+M-10046,PRV-330,Specialist,Dr. Rachel Green,Cardiology,Heart Center of FL,2345678904,305-555-0300,FL,true
+M-10047,PRV-212,PCP,Dr. Sarah Kim,Geriatrics,Midwest Geriatric Care,1234567894,312-555-0156,IL,true
+M-10047,PRV-301,ER,Dr. Emergency Staff,Emergency Medicine,Memorial Hermann ER,2345678901,713-555-0911,TX,true
+M-10048,PRV-215,PCP,Dr. James Ortiz,Family Medicine,Desert Family Health,1234567895,602-555-0189,AZ,true
+M-10049,PRV-218,PCP,Dr. Nancy Cooper,Internal Medicine,Cooper Medical Associates,1234567896,215-555-0145,PA,true
+M-10049,PRV-301,ER,Dr. Emergency Staff,Emergency Medicine,Memorial Hermann ER,2345678901,713-555-0911,TX,true
+M-10050,PRV-220,PCP,Dr. Brian Lee,Family Medicine,Buckeye Health Partners,1234567897,614-555-0178,OH,true
+M-10050,PRV-345,Specialist,Dr. Jennifer Adams,Gastroenterology,Buckeye GI Specialists,2345678911,614-555-0290,OH,true
+M-10051,PRV-222,PCP,Dr. Emily Foster,Family Medicine,Pacific NW Family Care,1234567898,206-555-0123,WA,true
+M-10052,PRV-201,PCP,Dr. Anita Patel,Family Medicine,Patel Family Medicine,1234567890,713-555-0142,TX,true
+M-10052,PRV-301,ER,Dr. Emergency Staff,Emergency Medicine,Memorial Hermann ER,2345678901,713-555-0911,TX,true
+M-10052,PRV-346,Specialist,Dr. David Nguyen,Cardiac Rehabilitation,Memorial Hermann Cardiac Rehab,2345678912,713-555-0400,TX,true
+M-10053,PRV-205,PCP,Dr. Carlos Mendez,Family Medicine,Mendez Medical Group,1234567891,415-555-0198,CA,true
+M-10053,PRV-310,ER,Dr. Emergency Staff,Emergency Medicine,Kaiser Permanente ER,2345678902,415-555-0911,CA,true
+M-10053,PRV-342,Specialist,Dr. William Chen,Psychiatry,Bay Area Behavioral Health,2345678908,415-555-0310,CA,true
+M-10054,PRV-218,PCP,Dr. Nancy Cooper,Internal Medicine,Cooper Medical Associates,1234567896,215-555-0145,PA,true
+M-10054,PRV-340,Specialist,Dr. Kevin Park,Nephrology,Cooper Nephrology Associates,2345678906,215-555-0250,PA,true
+M-10054,PRV-344,Specialist,Dr. Robert Kim,Neurology,Cooper Neurology Associates,2345678910,215-555-0280,PA,true
+M-10055,PRV-220,PCP,Dr. Brian Lee,Family Medicine,Buckeye Health Partners,1234567897,614-555-0178,OH,true
+M-10056,PRV-215,PCP,Dr. James Ortiz,Family Medicine,Desert Family Health,1234567895,602-555-0189,AZ,true
+M-10057,PRV-212,PCP,Dr. Sarah Kim,Geriatrics,Midwest Geriatric Care,1234567894,312-555-0156,IL,true
+M-10058,PRV-210,PCP,Dr. Mark Thompson,Cardiology,Baptist Heart Center,1234567893,305-555-0134,FL,true
+M-10059,PRV-208,PCP,Dr. Lisa Wong,Internal Medicine,Wong Internal Medicine,1234567892,212-555-0167,NY,true
+M-10059,PRV-340,Specialist,Dr. Kevin Park,Nephrology,Cooper Nephrology Associates,2345678906,215-555-0250,PA,true
+M-10059,PRV-347,Specialist,Dr. Amanda Wright,Physical Therapy,NYU Langone Rehab,2345678913,212-555-0320,NY,true
+M-10060,PRV-222,PCP,Dr. Emily Foster,Family Medicine,Pacific NW Family Care,1234567898,206-555-0123,WA,true

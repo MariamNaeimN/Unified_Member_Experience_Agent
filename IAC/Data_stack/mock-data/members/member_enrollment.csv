@@ -1,0 +1,20 @@
+memberId,firstName,lastName,dob,gender,planName,planType,coverageStatus,enrollmentDate,pcpId,state,livingSituation,riskScore,allergies,bloodType,bmi,smokingStatus,preferredLanguage
+M-10042,John,Smith,1968-03-15,Male,Gold PPO,PPO,Active,2019-06-01,PRV-201,TX,Alone,92,"Penicillin;Sulfa",A+,31.2,Former,English
+M-10043,Maria,Garcia,1975-08-22,Female,Silver HMO,HMO,Active,2020-01-15,PRV-205,CA,With family,78,"None",O+,27.8,Never,Spanish
+M-10044,Robert,Chen,1959-11-03,Male,Gold PPO,PPO,Active,2018-09-10,PRV-208,NY,Alone,85,"Aspirin",B+,29.5,Never,English
+M-10045,Linda,Johnson,1982-05-19,Female,Bronze EPO,EPO,Active,2021-03-01,PRV-201,TX,With family,45,"None",A-,26.1,Never,English
+M-10046,James,Williams,1971-12-08,Male,Platinum PPO,PPO,Active,2017-02-20,PRV-210,FL,With family,55,"None",O+,28.3,Former,English
+M-10047,Patricia,Brown,1965-07-30,Female,Gold HMO,HMO,Active,2019-11-15,PRV-212,IL,Assisted,88,"Codeine;Latex",AB+,22.1,Never,English
+M-10048,David,Martinez,1988-01-25,Male,Silver PPO,PPO,Active,2022-06-01,PRV-215,AZ,Alone,12,"None",A+,24.5,Never,English
+M-10049,Susan,Davis,1955-09-14,Female,Gold PPO,PPO,Active,2016-04-10,PRV-218,PA,Alone,90,"Ibuprofen",B-,33.7,Never,English
+M-10050,Michael,Wilson,1978-04-02,Male,Bronze HMO,HMO,Active,2023-01-01,PRV-220,OH,With family,48,"None",O-,30.1,Current,English
+M-10051,Jennifer,Taylor,1990-06-17,Female,Silver EPO,EPO,Active,2024-08-15,PRV-222,WA,With family,15,"Amoxicillin",A+,23.2,Never,English
+M-10052,Thomas,Anderson,1962-10-28,Male,Gold PPO,PPO,Active,2018-03-15,PRV-201,TX,With family,94,"None",O+,32.4,Current,English
+M-10053,Angela,Robinson,1980-02-14,Female,Silver HMO,HMO,Active,2021-07-01,PRV-205,CA,Alone,42,"Sulfa",AB-,25.8,Never,English
+M-10054,Richard,Lee,1950-06-22,Male,Platinum PPO,PPO,Active,2015-01-10,PRV-218,PA,Assisted,96,"Penicillin;Contrast dye",A+,26.9,Former,English
+M-10055,Karen,White,1973-11-05,Female,Gold HMO,HMO,Active,2020-09-20,PRV-220,OH,With family,35,"None",B+,24.0,Never,English
+M-10056,Daniel,Harris,1995-08-30,Male,Bronze EPO,EPO,Active,2025-01-01,PRV-215,AZ,Alone,8,"None",O+,22.8,Never,English
+M-10057,Barbara,Clark,1958-04-18,Female,Gold PPO,PPO,Active,2017-06-15,PRV-212,IL,Alone,91,"Metformin",A-,30.5,Never,English
+M-10058,Christopher,Lewis,1985-12-09,Male,Silver PPO,PPO,Active,2022-11-01,PRV-210,FL,With family,30,"None",B+,27.2,Never,English
+M-10059,Dorothy,Walker,1947-03-25,Female,Platinum PPO,PPO,Active,2014-05-20,PRV-208,NY,Assisted,98,"Penicillin;ACE inhibitors;Shellfish",O-,21.5,Former,English
+M-10060,Kevin,Hall,1970-07-12,Male,Gold HMO,HMO,Active,2019-04-10,PRV-222,WA,With family,28,"None",A+,29.0,Former,English
