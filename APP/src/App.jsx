@@ -7,6 +7,7 @@ import ChatPage from './pages/ChatPage';
 import MembersPage from './pages/MembersPage';
 import ProfilePage from './pages/ProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
+import UserProfilePage from './pages/UserProfilePage';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/members" element={<MembersPage />} />
           <Route path="/members/:memberId" element={<ProfilePage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/profile" element={<UserProfilePage user={user} />} />
         </Route>
       </Routes>
     </BrowserRouter>
