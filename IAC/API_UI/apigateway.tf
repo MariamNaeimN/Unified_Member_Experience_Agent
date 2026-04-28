@@ -220,6 +220,53 @@ resource "aws_api_gateway_integration" "members_profile_get" {
   uri                     = aws_lambda_function.chat_api.invoke_arn
 }
 
+# OPTIONS /members/profile — CORS
+resource "aws_api_gateway_method" "members_profile_options" {
+  rest_api_id   = aws_api_gateway_rest_api.chat_api.id
+  resource_id   = aws_api_gateway_resource.members_profile.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "members_profile_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.members_profile.id
+  http_method = aws_api_gateway_method.members_profile_options.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "members_profile_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.members_profile.id
+  http_method = aws_api_gateway_method.members_profile_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "members_profile_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.members_profile.id
+  http_method = aws_api_gateway_method.members_profile_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+
+  depends_on = [aws_api_gateway_integration.members_profile_options]
+}
+
 # =============================================================================
 # Deployment
 # =============================================================================
@@ -273,6 +320,53 @@ resource "aws_api_gateway_integration" "notification_patch" {
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.chat_api.invoke_arn
+}
+
+# OPTIONS /notifications/{notifId} — CORS
+resource "aws_api_gateway_method" "notification_item_options" {
+  rest_api_id   = aws_api_gateway_rest_api.chat_api.id
+  resource_id   = aws_api_gateway_resource.notification_item.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "notification_item_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.notification_item.id
+  http_method = aws_api_gateway_method.notification_item_options.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "notification_item_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.notification_item.id
+  http_method = aws_api_gateway_method.notification_item_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "notification_item_options" {
+  rest_api_id = aws_api_gateway_rest_api.chat_api.id
+  resource_id = aws_api_gateway_resource.notification_item.id
+  http_method = aws_api_gateway_method.notification_item_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization'"
+    "method.response.header.Access-Control-Allow-Methods" = "'PATCH,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+
+  depends_on = [aws_api_gateway_integration.notification_item_options]
 }
 
 # OPTIONS /notifications — CORS
@@ -353,8 +447,10 @@ resource "aws_api_gateway_deployment" "chat_api" {
     aws_api_gateway_integration.chat_get,
     aws_api_gateway_integration.members_get,
     aws_api_gateway_integration.members_profile_get,
+    aws_api_gateway_integration.members_profile_options,
     aws_api_gateway_integration.notifications_get,
     aws_api_gateway_integration.notification_patch,
+    aws_api_gateway_integration.notification_item_options,
     aws_api_gateway_integration.chat_options,
     aws_api_gateway_integration.members_options,
     aws_api_gateway_integration.notifications_options,

@@ -159,16 +159,35 @@ def handle_chat(body, user_email, user_name):
             is_cached = output.get("status") == "cached"
 
             if is_cached:
-                # Cached path — data is in output.result
+                # Cached path — read full response from agent table
                 cached = output.get("result", {})
-                agent_response = cached.get("summary", "Profile analysis returned from cache.")
+                agent_response = cached.get("agentResponse", "")
+                decision_id = cached.get("decisionId", "")
+                care_gaps = cached.get("careGaps", 0)
+                interventions_count = cached.get("interventions", 0)
+
+                # If agentResponse is short/missing, read from DynamoDB directly
+                if len(agent_response) < 500:
+                    agent_table = dynamodb.Table(AGENT_TABLE_NAME)
+                    session_results = agent_table.query(
+                        KeyConditionExpression=Key("memberId").eq(member_id) & Key("recordType").begins_with("SESSION#"),
+                        ScanIndexForward=False,
+                        Limit=1
+                    )
+                    for sess in session_results.get("Items", []):
+                        agent_response = sess.get("agentResponse", agent_response)
+                        decision_id = sess.get("decisionId", decision_id)
+                        care_gaps = len(sess.get("careGaps", []))
+                        interventions_count = len(sess.get("interventions", []))
+                        break
+
                 return response(200, {
                     "memberId": member_id,
                     "sessionId": session_id,
                     "agentResponse": agent_response,
-                    "decisionId": cached.get("decisionId", ""),
-                    "careGaps": cached.get("careGaps", 0),
-                    "interventions": cached.get("interventions", 0),
+                    "decisionId": decision_id,
+                    "careGaps": care_gaps,
+                    "interventions": interventions_count,
                     "status": "success",
                     "cached": True
                 })

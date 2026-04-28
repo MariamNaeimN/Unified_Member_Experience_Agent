@@ -60,7 +60,7 @@ dynamodb = boto3.resource("dynamodb")
 TABLE_NAME = os.environ["DYNAMODB_TABLE_NAME"]
 AGENT_TABLE_NAME = os.environ.get("DYNAMODB_AGENT_TABLE_NAME", TABLE_NAME)
 
-CACHE_TTL_HOURS = 1
+CACHE_TTL_HOURS = 0.5
 
 # Source data types — these are the records that come from S3 ETL
 SOURCE_TYPES = ("MEMBER#", "PATIENT#", "CONDITION#", "CLAIM#", "PHARMACY#", "CARE_EVENT#", "PROVIDER#")
@@ -216,6 +216,7 @@ def lambda_handler(event, context):
             "careGaps": len(latest_session.get("careGaps", [])),
             "interventions": len(latest_session.get("interventions", [])),
             "summary": latest_session.get("agentResponse", ""),
+            "agentResponse": latest_session.get("agentResponse", ""),
             "talkingPoints": latest_session.get("talkingPoints", []),
             "status": "cached"
         }

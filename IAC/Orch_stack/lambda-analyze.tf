@@ -144,7 +144,20 @@ def build_prompt(profile, chat_history=None, user_message=""):
     parts.append("")
     parts.append("MEMBER INFORMATION:")
     parts.append("- Name: " + member.get("firstName", "") + " " + member.get("lastName", ""))
-    parts.append("- DOB: " + member.get("dob", ""))
+    # Pre-calculate age — don't show DOB to prevent LLM from recalculating incorrectly
+    dob = member.get("dob", "")
+    age_str = ""
+    if dob:
+        try:
+            from datetime import datetime as dt
+            born = dt.strptime(dob, "%Y-%m-%d")
+            today = dt.utcnow()
+            age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+            age_str = str(age)
+        except Exception:
+            age_str = "unknown"
+    parts.append("- Age: " + age_str + " years old")
+    parts.append("- IMPORTANT: The member is exactly " + age_str + " years old. Do not say any other age.")
     parts.append("- Plan: " + member.get("planName", ""))
     parts.append("- Coverage: " + member.get("coverageStatus", ""))
     parts.append("")
@@ -197,8 +210,18 @@ def build_prompt(profile, chat_history=None, user_message=""):
                 overdue_count += 1
             if adherence_val < 80:
                 low_adherence_count += 1
-            parts.append("- " + rx.get("medication", "") + " " + rx.get("dosage", "") + ": Adherence " + str(adherence) + "%, Status: " + status + ", Last Refill: " + rx.get("lastRefillDate", ""))
-        parts.append("MEDICATION SUMMARY: " + str(overdue_count) + " overdue refills, " + str(low_adherence_count) + " below 80% adherence")
+            # Pre-flag for the LLM so it doesn't miscalculate
+            flags = []
+            if status == "Overdue":
+                flags.append("FLAGGED: OVERDUE REFILL")
+            if adherence_val < 80:
+                flags.append("FLAGGED: BELOW 80% THRESHOLD (" + str(adherence_val) + "%)")
+            elif adherence_val >= 80:
+                flags.append("OK: ABOVE 80% THRESHOLD (" + str(adherence_val) + "%)")
+            flag_str = " | ".join(flags) if flags else "OK"
+            parts.append("- " + rx.get("medication", "") + " " + rx.get("dosage", "") + ": Adherence " + str(adherence) + "%, Status: " + status + ", Last Refill: " + rx.get("lastRefillDate", "") + " [" + flag_str + "]")
+        parts.append("MEDICATION SUMMARY: " + str(overdue_count) + " overdue refills, " + str(low_adherence_count) + " medications below 80% adherence threshold")
+        parts.append("IMPORTANT: Only flag medications as non-adherent if they are explicitly marked FLAGGED above. Do NOT flag medications marked OK.")
     else:
         parts.append("- No medications on record")
     parts.append("")

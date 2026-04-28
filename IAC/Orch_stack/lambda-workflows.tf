@@ -98,6 +98,7 @@ def lambda_handler(event, context):
         return {
             "memberId": member_id,
             "workflowsExecuted": 0,
+            "workflowsFailed": 0,
             "results": [],
             "status": "no_interventions"
         }
