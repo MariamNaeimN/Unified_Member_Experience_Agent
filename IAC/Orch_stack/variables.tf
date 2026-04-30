@@ -69,3 +69,15 @@ variable "log_retention_days" {
   type        = number
   default     = 30
 }
+
+variable "cognito_user_pool_id" {
+  description = "Cognito User Pool ID for listing care managers"
+  type        = string
+  default     = "us-east-1_vvcOmWFgl"
+}
+
+variable "sender_email" {
+  description = "SES verified sender email for care manager notifications"
+  type        = string
+  default     = "no-reply@example.com"
+}

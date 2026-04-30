@@ -11,10 +11,12 @@
 # =============================================================================
 
 resource "aws_dynamodb_table" "unified_member_profile" {
-  name         = "${var.project_name}-unified-profile-${var.environment}"
-  billing_mode = var.dynamodb_billing_mode
-  hash_key     = "memberId"
-  range_key    = "recordType"
+  name             = "${var.project_name}-unified-profile-${var.environment}"
+  billing_mode     = var.dynamodb_billing_mode
+  hash_key         = "memberId"
+  range_key        = "recordType"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
 
   # --- Primary Key ---
   attribute {

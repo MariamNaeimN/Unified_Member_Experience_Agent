@@ -50,7 +50,8 @@ resource "aws_iam_role_policy" "lambda_orch_dynamodb" {
         "dynamodb:Query",
         "dynamodb:PutItem",
         "dynamodb:BatchWriteItem",
-        "dynamodb:UpdateItem"
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem"
       ]
       Resource = [
         local.dynamodb_arn,
@@ -190,6 +191,36 @@ resource "aws_iam_role_policy" "sfn_xray" {
         "xray:GetSamplingTargets"
       ]
       Resource = "*"
+    }]
+  })
+}
+
+# SES Send Email
+resource "aws_iam_role_policy" "lambda_orch_ses" {
+  name = "${var.project_name}-lambda-orch-ses-${var.environment}"
+  role = aws_iam_role.lambda_orch_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["ses:SendEmail", "ses:SendRawEmail"]
+      Resource = "*"
+    }]
+  })
+}
+
+# Cognito ListUsers (to get care manager emails)
+resource "aws_iam_role_policy" "lambda_orch_cognito" {
+  name = "${var.project_name}-lambda-orch-cognito-${var.environment}"
+  role = aws_iam_role.lambda_orch_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["cognito-idp:ListUsers"]
+      Resource = "arn:aws:cognito-idp:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:userpool/${var.cognito_user_pool_id}"
     }]
   })
 }

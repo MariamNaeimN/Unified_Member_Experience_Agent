@@ -57,3 +57,86 @@ CLM-50162,M-10059,Outpatient,N18.5,Chronic kidney disease stage 5,PRV-208,Wong I
 CLM-50163,M-10059,Professional,I48.2,Chronic atrial fibrillation,PRV-208,Wong Internal Medicine,2026-04-08,195.00,Paid
 CLM-50170,M-10060,Outpatient,K21.0,Gastro-esophageal reflux disease with esophagitis,PRV-222,Pacific NW Family Care,2026-01-18,155.00,Paid
 CLM-50171,M-10060,Professional,G43.909,Migraine unspecified not intractable without status migrainosus,PRV-222,Pacific NW Family Care,2026-03-25,145.00,Paid
+
+CLM-50300,M-10061,Outpatient,I10,Essential hypertension,PRV-201,Dr. Patel Family Medicine,2026-02-18,155.00,Paid
+CLM-50301,M-10061,Professional,E78.5,Hyperlipidemia unspecified,PRV-201,Dr. Patel Family Medicine,2026-02-18,120.00,Paid
+CLM-50310,M-10062,Emergency,I50.9,Heart failure unspecified,PRV-208,Wong Internal Medicine ER,2026-01-22,6800.00,Paid
+CLM-50311,M-10062,Inpatient,I50.9,Heart failure unspecified,PRV-208,Wong Internal Medicine Hospital,2026-01-22,18500.00,Paid
+CLM-50312,M-10062,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-208,Wong Internal Medicine,2026-03-10,185.00,Paid
+CLM-50313,M-10062,Professional,I10,Essential hypertension,PRV-208,Wong Internal Medicine,2026-03-10,95.00,Paid
+CLM-50320,M-10063,Outpatient,Z00.00,General adult medical examination,PRV-205,Mendez Medical Group,2026-03-15,175.00,Paid
+CLM-50330,M-10064,Emergency,I50.23,Acute on chronic systolic heart failure,PRV-218,Cooper Medical Associates ER,2026-01-08,8200.00,Paid
+CLM-50331,M-10064,Inpatient,I50.23,Acute on chronic systolic heart failure,PRV-218,Cooper Medical Associates Hospital,2026-01-08,25000.00,Paid
+CLM-50332,M-10064,Inpatient,N18.4,Chronic kidney disease stage 4,PRV-218,Cooper Medical Associates Hospital,2026-03-12,16800.00,Paid
+CLM-50333,M-10064,Outpatient,I48.91,Unspecified atrial fibrillation,PRV-218,Cooper Medical Associates,2026-04-02,285.00,Paid
+CLM-50334,M-10064,Professional,N18.4,Chronic kidney disease stage 4,PRV-218,Cooper Medical Associates,2026-04-02,210.00,Paid
+CLM-50340,M-10065,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-212,Midwest Geriatric Care,2026-02-20,185.00,Paid
+CLM-50341,M-10065,Professional,I10,Essential hypertension,PRV-212,Midwest Geriatric Care,2026-02-20,95.00,Paid
+CLM-50350,M-10066,Outpatient,Z00.00,General adult medical examination,PRV-215,Desert Family Health,2026-01-15,180.00,Paid
+CLM-50351,M-10066,Professional,F17.210,Nicotine dependence cigarettes uncomplicated,PRV-215,Desert Family Health,2026-01-15,95.00,Paid
+CLM-50360,M-10067,Emergency,J44.1,COPD with acute exacerbation,PRV-210,Baptist Health ER,2026-02-08,4200.00,Paid
+CLM-50361,M-10067,Inpatient,J44.1,COPD with acute exacerbation,PRV-210,Baptist Health Hospital,2026-02-08,14500.00,Paid
+CLM-50362,M-10067,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-210,Baptist Heart Center,2026-03-15,185.00,Paid
+CLM-50363,M-10067,Emergency,J44.1,COPD with acute exacerbation,PRV-210,Baptist Health ER,2026-04-05,3900.00,Paid
+CLM-50370,M-10068,Outpatient,I10,Essential hypertension,PRV-220,Buckeye Health Partners,2026-02-10,145.00,Paid
+CLM-50371,M-10068,Professional,Z00.00,General adult medical examination,PRV-220,Buckeye Health Partners,2026-02-10,120.00,Paid
+CLM-50380,M-10069,Outpatient,Z00.00,General adult medical examination,PRV-222,Pacific NW Family Care,2026-03-20,175.00,Paid
+CLM-50390,M-10070,Emergency,I50.23,Acute on chronic systolic heart failure,PRV-301,Memorial Hermann ER,2026-01-28,7500.00,Paid
+CLM-50391,M-10070,Inpatient,I50.23,Acute on chronic systolic heart failure,PRV-301,Memorial Hermann Hospital,2026-01-28,22000.00,Paid
+CLM-50392,M-10070,Outpatient,N18.3,Chronic kidney disease stage 3,PRV-201,Dr. Patel Family Medicine,2026-03-20,195.00,Paid
+CLM-50393,M-10070,Professional,I10,Essential hypertension,PRV-201,Dr. Patel Family Medicine,2026-03-20,95.00,Paid
+CLM-50394,M-10070,Emergency,I50.23,Acute on chronic systolic heart failure,PRV-301,Memorial Hermann ER,2026-04-15,6800.00,Paid
+CLM-50400,M-10071,Outpatient,M06.9,Rheumatoid arthritis unspecified,PRV-205,Mendez Medical Group,2026-02-15,195.00,Paid
+CLM-50401,M-10071,Professional,M81.0,Age-related osteoporosis without current pathological fracture,PRV-205,Mendez Medical Group,2026-02-15,175.00,Paid
+CLM-50410,M-10072,Outpatient,I10,Essential hypertension,PRV-208,Wong Internal Medicine,2026-01-28,145.00,Paid
+CLM-50411,M-10072,Professional,F17.210,Nicotine dependence cigarettes uncomplicated,PRV-208,Wong Internal Medicine,2026-01-28,95.00,Paid
+CLM-50420,M-10073,Outpatient,Z00.00,General adult medical examination,PRV-212,Midwest Geriatric Care,2026-02-25,175.00,Paid
+CLM-50430,M-10074,Emergency,I50.23,Acute on chronic systolic heart failure,PRV-218,Cooper Medical Associates ER,2026-01-15,9200.00,Paid
+CLM-50431,M-10074,Inpatient,I50.23,Acute on chronic systolic heart failure,PRV-218,Cooper Medical Associates Hospital,2026-01-15,28000.00,Paid
+CLM-50432,M-10074,Emergency,N18.5,Chronic kidney disease stage 5,PRV-218,Cooper Medical Associates ER,2026-03-05,7800.00,Paid
+CLM-50433,M-10074,Inpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-218,Cooper Medical Associates Hospital,2026-03-20,12500.00,Paid
+CLM-50434,M-10074,Professional,I48.91,Unspecified atrial fibrillation,PRV-218,Cooper Medical Associates,2026-04-05,285.00,Paid
+CLM-50440,M-10075,Outpatient,J45.40,Moderate persistent asthma uncomplicated,PRV-215,Desert Family Health,2026-03-05,165.00,Paid
+CLM-50441,M-10075,Professional,F41.1,Generalized anxiety disorder,PRV-215,Desert Family Health,2026-03-05,145.00,Paid
+CLM-50450,M-10076,Emergency,I25.10,Atherosclerotic heart disease,PRV-210,Baptist Health ER,2026-02-15,5200.00,Paid
+CLM-50451,M-10076,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-210,Baptist Heart Center,2026-03-22,185.00,Paid
+CLM-50452,M-10076,Professional,I10,Essential hypertension,PRV-210,Baptist Heart Center,2026-03-22,95.00,Paid
+CLM-50453,M-10076,Emergency,I25.10,Atherosclerotic heart disease,PRV-210,Baptist Health ER,2026-04-18,4800.00,Paid
+CLM-50460,M-10077,Outpatient,Z00.00,General adult medical examination,PRV-220,Buckeye Health Partners,2026-04-01,175.00,Paid
+CLM-50470,M-10078,Outpatient,J44,Chronic obstructive pulmonary disease unspecified,PRV-222,Pacific NW Family Care,2026-02-28,185.00,Paid
+CLM-50471,M-10078,Professional,I10,Essential hypertension,PRV-222,Pacific NW Family Care,2026-02-28,95.00,Paid
+CLM-50472,M-10078,Emergency,J44.1,COPD with acute exacerbation,PRV-222,Pacific NW Family Care ER,2026-04-10,3800.00,Paid
+CLM-50480,M-10079,Emergency,I50.9,Heart failure unspecified,PRV-301,Memorial Hermann ER,2026-01-20,7200.00,Paid
+CLM-50481,M-10079,Inpatient,I50.9,Heart failure unspecified,PRV-301,Memorial Hermann Hospital,2026-01-20,20000.00,Paid
+CLM-50482,M-10079,Outpatient,N18.4,Chronic kidney disease stage 4,PRV-201,Dr. Patel Family Medicine,2026-03-15,210.00,Paid
+CLM-50483,M-10079,Professional,I10,Essential hypertension,PRV-201,Dr. Patel Family Medicine,2026-03-15,95.00,Paid
+CLM-50484,M-10079,Emergency,I50.9,Heart failure unspecified,PRV-301,Memorial Hermann ER,2026-04-10,6500.00,Paid
+CLM-50490,M-10080,Outpatient,J30.2,Seasonal allergic rhinitis,PRV-205,Mendez Medical Group,2026-01-20,145.00,Paid
+CLM-50500,M-10081,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-208,Wong Internal Medicine,2026-03-12,185.00,Paid
+CLM-50501,M-10081,Professional,E03.9,Hypothyroidism unspecified,PRV-208,Wong Internal Medicine,2026-03-12,155.00,Paid
+CLM-50510,M-10082,Emergency,I50.9,Heart failure unspecified,PRV-212,Midwest Geriatric Care ER,2026-02-10,5800.00,Paid
+CLM-50511,M-10082,Inpatient,I50.9,Heart failure unspecified,PRV-212,Midwest Geriatric Care Hospital,2026-02-10,16000.00,Paid
+CLM-50512,M-10082,Outpatient,I48.91,Unspecified atrial fibrillation,PRV-212,Midwest Geriatric Care,2026-03-30,285.00,Paid
+CLM-50513,M-10082,Professional,I10,Essential hypertension,PRV-212,Midwest Geriatric Care,2026-03-30,95.00,Paid
+CLM-50520,M-10083,Outpatient,Z00.00,General adult medical examination,PRV-218,Cooper Medical Associates,2026-03-10,175.00,Paid
+CLM-50530,M-10084,Emergency,I63.9,Cerebral infarction unspecified,PRV-215,Desert Family Health ER,2026-01-10,9500.00,Paid
+CLM-50531,M-10084,Inpatient,I63.9,Cerebral infarction unspecified,PRV-215,Desert Family Health Hospital,2026-01-10,32000.00,Paid
+CLM-50532,M-10084,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-215,Desert Family Health,2026-03-18,195.00,Paid
+CLM-50533,M-10084,Professional,I48.91,Unspecified atrial fibrillation,PRV-215,Desert Family Health,2026-03-18,285.00,Paid
+CLM-50534,M-10084,Emergency,I48.91,Unspecified atrial fibrillation with rapid ventricular response,PRV-215,Desert Family Health ER,2026-04-12,4500.00,Paid
+CLM-50540,M-10085,Outpatient,F32.1,Major depressive disorder single episode moderate,PRV-210,Baptist Health Clinic,2026-02-25,185.00,Paid
+CLM-50541,M-10085,Professional,F32.1,Major depressive disorder single episode moderate,PRV-210,Baptist Health Clinic,2026-04-08,175.00,Paid
+CLM-50550,M-10086,Outpatient,Z00.00,General adult medical examination,PRV-220,Buckeye Health Partners,2026-02-15,175.00,Paid
+CLM-50560,M-10087,Emergency,E11.65,Type 2 diabetes with hyperglycemia,PRV-222,Pacific NW Family Care ER,2026-02-05,3500.00,Paid
+CLM-50561,M-10087,Outpatient,E11.65,Type 2 diabetes with hyperglycemia,PRV-222,Pacific NW Family Care,2026-03-08,185.00,Paid
+CLM-50562,M-10087,Professional,I10,Essential hypertension,PRV-222,Pacific NW Family Care,2026-03-08,95.00,Paid
+CLM-50570,M-10088,Outpatient,F17.210,Nicotine dependence cigarettes uncomplicated,PRV-201,Dr. Patel Family Medicine,2026-01-22,145.00,Paid
+CLM-50571,M-10088,Professional,Z00.00,General adult medical examination,PRV-201,Dr. Patel Family Medicine,2026-01-22,120.00,Paid
+CLM-50580,M-10089,Outpatient,M06.9,Rheumatoid arthritis unspecified,PRV-205,Mendez Medical Group,2026-03-15,195.00,Paid
+CLM-50581,M-10089,Professional,I10,Essential hypertension,PRV-205,Mendez Medical Group,2026-03-15,95.00,Paid
+CLM-50582,M-10089,Emergency,M06.9,Rheumatoid arthritis unspecified flare,PRV-310,Kaiser Permanente ER,2026-04-08,2800.00,Paid
+CLM-50590,M-10090,Emergency,I50.9,Heart failure unspecified,PRV-208,Wong Internal Medicine ER,2026-01-25,6500.00,Paid
+CLM-50591,M-10090,Inpatient,I50.9,Heart failure unspecified,PRV-208,Wong Internal Medicine Hospital,2026-01-25,19000.00,Paid
+CLM-50592,M-10090,Outpatient,N18.3,Chronic kidney disease stage 3,PRV-208,Wong Internal Medicine,2026-04-02,195.00,Paid
+CLM-50593,M-10090,Professional,I10,Essential hypertension,PRV-208,Wong Internal Medicine,2026-04-02,95.00,Paid
+CLM-50600,M-10091,Outpatient,Z00.00,General adult medical examination,PRV-212,Midwest Geriatric Care,2026-03-28,175.00,Paid

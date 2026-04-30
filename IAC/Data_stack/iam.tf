@@ -114,3 +114,91 @@ resource "aws_iam_role_policy" "lambda_dynamodb_access" {
     ]
   })
 }
+
+# =============================================================================
+# IAM — Role for DynamoDB Stream Trigger Lambda
+# =============================================================================
+
+# --- Lambda Execution Role ---
+resource "aws_iam_role" "lambda_trigger_role" {
+  name = "${var.project_name}-lambda-trigger-role-${var.environment}"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name = "${var.project_name}-lambda-trigger-role"
+    Role = "Lambda Stream Trigger Execution"
+  }
+}
+
+# --- CloudWatch Logs ---
+resource "aws_iam_role_policy" "lambda_trigger_logging" {
+  name = "${var.project_name}-lambda-trigger-logging-${var.environment}"
+  role = aws_iam_role.lambda_trigger_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "${aws_cloudwatch_log_group.lambda_trigger.arn}:*"
+      }
+    ]
+  })
+}
+
+# --- DynamoDB Streams (read stream records) ---
+resource "aws_iam_role_policy" "lambda_trigger_streams" {
+  name = "${var.project_name}-lambda-trigger-streams-${var.environment}"
+  role = aws_iam_role.lambda_trigger_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator",
+          "dynamodb:DescribeStream",
+          "dynamodb:ListStreams"
+        ]
+        Resource = "${aws_dynamodb_table.unified_member_profile.arn}/stream/*"
+      }
+    ]
+  })
+}
+
+# --- Step Functions StartExecution ---
+resource "aws_iam_role_policy" "lambda_trigger_sfn" {
+  name = "${var.project_name}-lambda-trigger-sfn-${var.environment}"
+  role = aws_iam_role.lambda_trigger_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = ["states:StartExecution"]
+        Resource = local.step_function_arn
+      }
+    ]
+  })
+}
+

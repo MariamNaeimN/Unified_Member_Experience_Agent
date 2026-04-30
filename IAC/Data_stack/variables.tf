@@ -56,3 +56,9 @@ variable "log_retention_days" {
   type        = number
   default     = 30
 }
+
+variable "step_function_arn" {
+  description = "Step Functions state machine ARN from Orch Stack (constructed from naming pattern if empty)"
+  type        = string
+  default     = ""
+}

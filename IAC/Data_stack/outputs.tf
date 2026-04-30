@@ -57,3 +57,9 @@ output "mock_data_upload_command" {
   description = "Command to upload mock data to S3"
   value       = "aws s3 sync ./mock-data/ s3://${aws_s3_bucket.data_lake.id}/raw/ --region ${var.aws_region}"
 }
+
+output "dynamodb_stream_arn" {
+  description = "DynamoDB unified member profile stream ARN"
+  value       = aws_dynamodb_table.unified_member_profile.stream_arn
+}
+

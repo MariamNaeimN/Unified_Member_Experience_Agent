@@ -164,7 +164,25 @@ function SourceDataTab({ profile }) {
 /* ── Agent Analysis Tab ───────────────────────────────────────────── */
 
 function AgentAnalysisTab({ profile }) {
-  const { aiDecisions = [], careGaps = [], interventions = [], summaries = [] } = profile;
+  // Deduplicate: keep only the latest AI decision (by updatedAt)
+  const allDecisions = profile.aiDecisions || [];
+  const latestDecision = allDecisions.length > 0
+    ? [allDecisions.sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || ''))[0]]
+    : [];
+  
+  // Deduplicate care gaps and interventions — keep only those matching the latest decisionId
+  const latestDecisionId = latestDecision[0]?.decisionId || '';
+  const allCareGaps = profile.careGaps || [];
+  const careGaps = latestDecisionId
+    ? allCareGaps.filter(g => g.decisionId === latestDecisionId || !g.decisionId)
+    : allCareGaps;
+  const allInterventions = profile.interventions || [];
+  const interventions = latestDecisionId
+    ? allInterventions.filter(inv => inv.decisionId === latestDecisionId || !inv.decisionId)
+    : allInterventions;
+  const summaries = profile.summaries || [];
+  
+  const aiDecisions = latestDecision;
   const hasData = aiDecisions.length || careGaps.length || interventions.length || summaries.length;
 
   if (!hasData) {
@@ -247,22 +265,40 @@ function AgentAnalysisTab({ profile }) {
       {/* Care Gaps */}
       {careGaps.length > 0 && (
         <Card title="Care Gaps" icon={Target} count={careGaps.length}>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {careGaps.map((g, i) => (
-              <div key={g.gapId || i} className="flex items-center justify-between border border-gray-100 rounded-lg p-3">
-                <div className="flex-1">
+              <div key={g.gapId || i} className="border border-gray-100 rounded-lg p-3">
+                <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-medium text-gray-900">{g.type || g.gapType || 'Gap'}</p>
-                  {g.protocol && <p className="text-xs text-gray-400 mt-0.5">Protocol: {g.protocol}</p>}
-                  {g.dueWithin && <p className="text-xs text-gray-400">Due: {g.dueWithin}</p>}
+                  <div className="flex items-center gap-2">
+                    <Badge color={
+                      g.priority === 'CRITICAL' ? 'red' :
+                      g.priority === 'HIGH' ? 'orange' :
+                      g.priority === 'MEDIUM' ? 'yellow' : 'green'
+                    }>{g.priority}</Badge>
+                    <Badge color={g.status === 'Open' ? 'blue' : 'gray'}>{g.status}</Badge>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Badge color={
-                    g.priority === 'CRITICAL' ? 'red' :
-                    g.priority === 'HIGH' ? 'orange' :
-                    g.priority === 'MEDIUM' ? 'yellow' : 'green'
-                  }>{g.priority}</Badge>
-                  <Badge color={g.status === 'Open' ? 'blue' : 'gray'}>{g.status}</Badge>
+                <div className="flex gap-4 text-xs text-gray-400 mb-2">
+                  {g.protocol && <span>Protocol: {g.protocol}</span>}
+                  {g.dueWithin && <span>Due: {g.dueWithin}</span>}
                 </div>
+                {g.details && (
+                  <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-2 mb-2">{g.details}</p>
+                )}
+                {g.actionItems && g.actionItems.length > 0 && (
+                  <div className="mt-2">
+                    <p className="text-xs text-gray-400 mb-1">Action Items:</p>
+                    <ul className="space-y-1">
+                      {g.actionItems.map((item, j) => (
+                        <li key={j} className="text-xs text-gray-700 flex items-start gap-2">
+                          <span className="text-blue-500 mt-0.5">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -349,8 +385,8 @@ export default function ProfilePage() {
   if (!profile?.member) return (
     <div className="p-8 text-center">
       <p className="text-red-500 text-lg">Member not found</p>
-      <button onClick={() => navigate('/members')} className="mt-4 text-blue-600 hover:underline text-sm">
-        Back to Members
+      <button onClick={() => navigate('/dashboard')} className="mt-4 text-blue-600 hover:underline text-sm">
+        Back to Dashboard
       </button>
     </div>
   );
@@ -359,15 +395,15 @@ export default function ProfilePage() {
   const riskScore = parseInt(patient?.riskScore || 0);
   const riskColor = riskScore >= 80 ? 'text-red-600' : riskScore >= 50 ? 'text-yellow-600' : 'text-green-600';
 
-  const agentDataCount = (profile.aiDecisions?.length || 0) + (profile.careGaps?.length || 0)
+  const agentDataCount = Math.min(profile.aiDecisions?.length || 0, 1) + (profile.careGaps?.length || 0)
     + (profile.interventions?.length || 0) + (profile.summaries?.length || 0);
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
       {/* Back button */}
-      <button onClick={() => navigate('/members')}
+      <button onClick={() => navigate('/dashboard')}
         className="flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600 mb-4">
-        <ArrowLeft className="w-4 h-4" /> Back to Members
+        <ArrowLeft className="w-4 h-4" /> Back to Dashboard
       </button>
 
       {/* Header card */}
@@ -406,14 +442,6 @@ export default function ProfilePage() {
           {activeTab === 'source' && <SourceDataTab profile={profile} />}
           {activeTab === 'agent' && <AgentAnalysisTab profile={profile} />}
         </div>
-      </div>
-
-      {/* CTA */}
-      <div className="text-center">
-        <button onClick={() => navigate(`/chat?memberId=${memberId}`)}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition font-medium">
-          Chat with Agent about {member.firstName}
-        </button>
       </div>
     </div>
   );

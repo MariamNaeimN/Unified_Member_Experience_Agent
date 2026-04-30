@@ -18,3 +18,34 @@ M-10057,Barbara,Clark,1958-04-18,Female,Gold PPO,PPO,Active,2017-06-15,PRV-212,I
 M-10058,Christopher,Lewis,1985-12-09,Male,Silver PPO,PPO,Active,2022-11-01,PRV-210,FL,With family,30,"None",B+,27.2,Never,English
 M-10059,Dorothy,Walker,1947-03-25,Female,Platinum PPO,PPO,Active,2014-05-20,PRV-208,NY,Assisted,98,"Penicillin;ACE inhibitors;Shellfish",O-,21.5,Former,English
 M-10060,Kevin,Hall,1970-07-12,Male,Gold HMO,HMO,Active,2019-04-10,PRV-222,WA,With family,28,"None",A+,29.0,Former,English
+M-10061,Sarah,Thompson,1983-09-12,Female,Gold PPO,PPO,Active,2020-02-15,PRV-201,TX,With family,62,"Latex",A+,28.4,Never,English
+M-10062,William,Jackson,1956-01-28,Male,Platinum PPO,PPO,Active,2015-08-01,PRV-208,NY,Alone,89,"None",O+,31.0,Former,English
+M-10063,Emily,Wright,1992-04-05,Female,Silver HMO,HMO,Active,2023-03-10,PRV-205,CA,With family,18,"Penicillin",B+,22.5,Never,English
+M-10064,Charles,King,1948-12-20,Male,Platinum PPO,PPO,Active,2013-01-15,PRV-218,PA,Assisted,97,"Aspirin;Codeine",AB+,25.3,Former,English
+M-10065,Margaret,Scott,1970-06-08,Female,Gold HMO,HMO,Active,2019-05-20,PRV-212,IL,With family,71,"None",A-,29.8,Never,English
+M-10066,Joseph,Green,1981-03-17,Male,Bronze EPO,EPO,Active,2022-09-01,PRV-215,AZ,Alone,25,"None",O+,26.7,Current,English
+M-10067,Nancy,Adams,1963-08-22,Female,Gold PPO,PPO,Active,2018-11-10,PRV-210,FL,Alone,83,"Sulfa;Ibuprofen",B-,32.1,Never,English
+M-10068,Mark,Baker,1977-02-14,Male,Silver PPO,PPO,Active,2021-04-15,PRV-220,OH,With family,44,"None",A+,27.9,Never,English
+M-10069,Lisa,Nelson,1989-11-30,Female,Bronze HMO,HMO,Active,2024-01-01,PRV-222,WA,With family,10,"Amoxicillin",O-,21.8,Never,English
+M-10070,Paul,Carter,1952-07-09,Male,Gold PPO,PPO,Active,2016-06-20,PRV-201,TX,Alone,93,"Penicillin",A+,30.6,Former,English
+M-10071,Betty,Mitchell,1966-10-15,Female,Silver HMO,HMO,Active,2020-08-01,PRV-205,CA,Assisted,76,"None",B+,26.2,Never,Spanish
+M-10072,George,Perez,1974-05-23,Male,Gold HMO,HMO,Active,2019-12-10,PRV-208,NY,With family,58,"Latex",O+,29.3,Current,English
+M-10073,Sandra,Roberts,1987-01-08,Female,Bronze EPO,EPO,Active,2023-07-15,PRV-212,IL,With family,22,"None",AB-,23.7,Never,English
+M-10074,Donald,Turner,1945-04-30,Male,Platinum PPO,PPO,Active,2012-03-01,PRV-218,PA,Assisted,99,"Penicillin;Sulfa;Contrast dye",A-,24.8,Former,English
+M-10075,Carol,Phillips,1979-12-18,Female,Gold PPO,PPO,Active,2020-10-05,PRV-215,AZ,Alone,65,"Codeine",B+,28.0,Never,English
+M-10076,Steven,Campbell,1960-08-07,Male,Silver PPO,PPO,Active,2017-09-20,PRV-210,FL,With family,82,"None",O+,31.5,Former,English
+M-10077,Donna,Parker,1993-06-25,Female,Bronze HMO,HMO,Active,2025-02-01,PRV-220,OH,With family,5,"None",A+,20.9,Never,English
+M-10078,Edward,Evans,1968-09-11,Male,Gold PPO,PPO,Active,2018-01-15,PRV-222,WA,Alone,74,"Aspirin",AB+,30.2,Current,English
+M-10079,Ruth,Edwards,1954-03-02,Female,Platinum PPO,PPO,Active,2014-11-20,PRV-201,TX,Assisted,95,"Ibuprofen;Latex",O-,27.4,Never,English
+M-10080,Brian,Collins,1986-07-19,Male,Silver HMO,HMO,Active,2022-05-10,PRV-205,CA,With family,33,"None",B-,25.6,Never,English
+M-10081,Sharon,Stewart,1971-11-28,Female,Gold HMO,HMO,Active,2019-07-01,PRV-208,NY,Alone,68,"Sulfa",A+,29.1,Never,English
+M-10082,Ronald,Sanchez,1958-02-16,Male,Gold PPO,PPO,Active,2016-12-15,PRV-212,IL,With family,87,"None",O+,32.8,Former,English
+M-10083,Michelle,Morris,1984-10-04,Female,Bronze EPO,EPO,Active,2023-11-01,PRV-218,PA,With family,20,"Penicillin",B+,24.3,Never,English
+M-10084,Kenneth,Rogers,1950-05-12,Male,Platinum PPO,PPO,Active,2013-08-10,PRV-215,AZ,Assisted,96,"Codeine;ACE inhibitors",A-,26.0,Former,English
+M-10085,Laura,Reed,1976-08-21,Female,Silver PPO,PPO,Active,2021-01-20,PRV-210,FL,Alone,52,"None",AB+,27.5,Never,English
+M-10086,Jason,Cook,1991-04-13,Male,Bronze HMO,HMO,Active,2024-06-01,PRV-220,OH,With family,14,"None",O+,23.1,Never,English
+M-10087,Helen,Morgan,1961-12-07,Female,Gold PPO,PPO,Active,2017-03-25,PRV-222,WA,Alone,80,"Metformin;Sulfa",B-,31.3,Never,English
+M-10088,Frank,Bell,1973-06-30,Male,Silver HMO,HMO,Active,2020-04-15,PRV-201,TX,With family,47,"None",A+,28.6,Current,English
+M-10089,Diane,Murphy,1967-09-18,Female,Gold HMO,HMO,Active,2018-08-01,PRV-205,CA,With family,73,"Latex",O-,29.7,Never,Spanish
+M-10090,Raymond,Bailey,1955-01-05,Male,Platinum PPO,PPO,Active,2015-05-10,PRV-208,NY,Assisted,91,"Penicillin;Aspirin",B+,25.9,Former,English
+M-10091,Amy,Rivera,1996-03-22,Female,Bronze EPO,EPO,Active,2025-03-01,PRV-212,IL,With family,7,"None",A+,21.2,Never,English

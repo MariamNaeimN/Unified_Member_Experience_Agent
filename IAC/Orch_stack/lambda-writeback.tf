@@ -50,6 +50,7 @@ import json
 import os
 import logging
 import boto3
+from boto3.dynamodb.conditions import Key
 from datetime import datetime, timedelta
 
 logger = logging.getLogger()
@@ -61,9 +62,10 @@ TABLE_NAME = os.environ["DYNAMODB_TABLE_NAME"]
 
 def lambda_handler(event, context):
     """
-    Write AI analysis results as a single SESSION record to DynamoDB.
+    Write AI analysis results to DynamoDB with structured output records.
+    Deletes old analysis records, writes new structured records, then writes SESSION.
     Input:  { "memberId": "M-10042", "profile": {...}, "aiResult": {...}, "sessionId": "...", "userMessage": "..." }
-    Output: { "memberId": "M-10042", "decisionId": "...", "sessionId": "...", "careGaps": N, "interventions": N, "agentResponse": "...", "status": "success" }
+    Output: { "memberId": "M-10042", "decisionId": "...", "sessionId": "...", "recordsWritten": N, ... }
     """
     member_id = event.get("memberId")
     ai_result = event.get("aiResult")
@@ -77,15 +79,141 @@ def lambda_handler(event, context):
         }
 
     table = dynamodb.Table(TABLE_NAME)
-    now = datetime.utcnow().isoformat()
-
     session_id = event.get("sessionId", "session-" + str(int(datetime.utcnow().timestamp())))
     user_message = event.get("userMessage", "Analyze member " + member_id)
+
+    # Phase 1: Delete old analysis records (preserves SESSION# records)
+    deleted_count = delete_old_analysis_records(table, member_id)
+
+    # Phase 2: Write new structured records
+    result = write_structured_records(table, member_id, ai_result, session_id, user_message)
+    result["recordsDeleted"] = deleted_count
+
+    return result
+
+
+def delete_old_analysis_records(table, member_id):
+    """
+    Delete all existing AI analysis records for a member before writing new ones.
+    Deletes AI_DECISION#, CARE_GAP#, INTERVENTION#, SUMMARY# records.
+    Does NOT delete SESSION# records (chat history is preserved).
+    Returns the count of deleted records.
+    """
+    prefixes_to_delete = ["AI_DECISION#", "CARE_GAP#", "INTERVENTION#", "SUMMARY#"]
+    deleted_count = 0
+
+    for prefix in prefixes_to_delete:
+        response = table.query(
+            KeyConditionExpression=Key("memberId").eq(member_id) & Key("recordType").begins_with(prefix)
+        )
+        old_records = response.get("Items", [])
+
+        if old_records:
+            with table.batch_writer() as batch:
+                for record in old_records:
+                    batch.delete_item(Key={
+                        "memberId": record["memberId"],
+                        "recordType": record["recordType"]
+                    })
+                    deleted_count += 1
+
+    if deleted_count > 0:
+        logger.info("Deleted %d old analysis records for %s", deleted_count, member_id)
+
+    return deleted_count
+
+
+def write_structured_records(table, member_id, ai_result, session_id, user_message):
+    """
+    Write AI_DECISION#, CARE_GAP#, INTERVENTION#, SUMMARY#, and SESSION# records.
+    Returns metadata about what was written.
+    """
+    now = datetime.utcnow().isoformat()
+    expires_at = int((datetime.utcnow() + timedelta(hours=24)).timestamp())
     decision_id = ai_result.get("decisionId", f"D-{int(datetime.utcnow().timestamp())}")
     agent_response = build_chat_response(ai_result)
-    expires_at = int((datetime.utcnow() + timedelta(hours=24)).timestamp())
+    records_written = 0
 
-    # Build single session record with all details nested
+    # 1: AI_DECISION record
+    ai_decision = {
+        "memberId": member_id,
+        "recordType": f"AI_DECISION#{decision_id}",
+        "decisionId": decision_id,
+        "gsiRecordType": "AI_DECISION",
+        "sessionId": session_id,
+        "analysis": ai_result.get("analysis", ""),
+        "riskAssessment": ai_result.get("riskAssessment", ""),
+        "claimsInsight": ai_result.get("claimsInsight", ""),
+        "careHistoryInsight": ai_result.get("careHistoryInsight", ""),
+        "medicationInsight": ai_result.get("medicationInsight", ""),
+        "confidence": str(ai_result.get("confidence", 0)),
+        "model": ai_result.get("model", ""),
+        "talkingPoints": ai_result.get("talkingPoints", []),
+        "updatedAt": now,
+        "expiresAt": expires_at,
+    }
+    table.put_item(Item=clean(ai_decision))
+    records_written += 1
+
+    # 2: CARE_GAP records
+    for i, gap in enumerate(ai_result.get("careGaps", [])):
+        gap_id = f"GAP-{int(datetime.utcnow().timestamp())}-{i}"
+        gap_record = {
+            "memberId": member_id,
+            "recordType": f"CARE_GAP#{gap_id}",
+            "gapId": gap_id,
+            "gsiRecordType": "CARE_GAP",
+            "decisionId": decision_id,
+            "type": gap.get("type", ""),
+            "priority": gap.get("priority", ""),
+            "protocol": gap.get("protocol", ""),
+            "dueWithin": gap.get("dueWithin", ""),
+            "details": gap.get("details", ""),
+            "actionItems": gap.get("actionItems", []),
+            "status": "Open",
+            "updatedAt": now,
+            "expiresAt": expires_at,
+        }
+        table.put_item(Item=clean(gap_record))
+        records_written += 1
+
+    # 3: INTERVENTION records
+    for i, inv in enumerate(ai_result.get("recommendedInterventions", [])):
+        inv_id = f"INT-{int(datetime.utcnow().timestamp())}-{i}"
+        inv_record = {
+            "memberId": member_id,
+            "recordType": f"INTERVENTION#{inv_id}",
+            "interventionId": inv_id,
+            "gsiRecordType": "INTERVENTION",
+            "decisionId": decision_id,
+            "type": inv.get("type", ""),
+            "target": inv.get("target", ""),
+            "message": inv.get("message", ""),
+            "linkedGap": inv.get("linkedGap", ""),
+            "system": inv.get("system", ""),
+            "status": "Triggered",
+            "updatedAt": now,
+            "expiresAt": expires_at,
+        }
+        table.put_item(Item=clean(inv_record))
+        records_written += 1
+
+    # 4: SUMMARY record
+    summary_record = {
+        "memberId": member_id,
+        "recordType": f"SUMMARY#{decision_id}",
+        "decisionId": decision_id,
+        "gsiRecordType": "SUMMARY",
+        "sessionId": session_id,
+        "talkingPoints": ai_result.get("talkingPoints", []),
+        "agentResponse": agent_response,
+        "updatedAt": now,
+        "expiresAt": expires_at,
+    }
+    table.put_item(Item=clean(summary_record))
+    records_written += 1
+
+    # 5: SESSION record (preserves existing behavior)
     session_record = {
         "memberId": member_id,
         "recordType": f"SESSION#{session_id}",
@@ -94,10 +222,8 @@ def lambda_handler(event, context):
         "gsiRecordType": "SESSION",
         "updatedAt": now,
         "expiresAt": expires_at,
-        # Chat
         "userMessage": user_message,
         "agentResponse": agent_response,
-        # AI Decision
         "analysis": ai_result.get("analysis", ""),
         "riskAssessment": ai_result.get("riskAssessment", ""),
         "claimsInsight": ai_result.get("claimsInsight", ""),
@@ -105,9 +231,7 @@ def lambda_handler(event, context):
         "medicationInsight": ai_result.get("medicationInsight", ""),
         "confidence": str(ai_result.get("confidence", 0)),
         "model": ai_result.get("model", ""),
-        # Summary
         "talkingPoints": ai_result.get("talkingPoints", []),
-        # Care Gaps (nested list)
         "careGaps": [
             {
                 "gapId": f"GAP-{int(datetime.utcnow().timestamp())}-{i}",
@@ -115,11 +239,12 @@ def lambda_handler(event, context):
                 "priority": g.get("priority", ""),
                 "protocol": g.get("protocol", ""),
                 "dueWithin": g.get("dueWithin", ""),
+                "details": g.get("details", ""),
+                "actionItems": g.get("actionItems", []),
                 "status": "Open"
             }
             for i, g in enumerate(ai_result.get("careGaps", []))
         ],
-        # Interventions (nested list)
         "interventions": [
             {
                 "interventionId": f"INT-{int(datetime.utcnow().timestamp())}-{i}",
@@ -132,7 +257,6 @@ def lambda_handler(event, context):
             }
             for i, inv in enumerate(ai_result.get("recommendedInterventions", []))
         ],
-        # Notifications (nested list for UI)
         "notifications": [
             {
                 "type": inv.get("type", ""),
@@ -145,25 +269,29 @@ def lambda_handler(event, context):
             for inv in ai_result.get("recommendedInterventions", [])
         ]
     }
+    table.put_item(Item=clean(session_record))
+    records_written += 1
 
-    # Remove empty strings (DynamoDB doesn't allow them)
-    clean_record = {k: v for k, v in session_record.items() if v != "" and v is not None}
-    table.put_item(Item=clean_record)
-
-    logger.info(f"Wrote SESSION#{session_id} for {member_id} "
-                f"({len(ai_result.get('careGaps', []))} gaps, "
-                f"{len(ai_result.get('recommendedInterventions', []))} interventions)")
+    logger.info("Wrote %d records for %s (AI_DECISION + %d CARE_GAPs + %d INTERVENTIONs + SUMMARY + SESSION)",
+                records_written, member_id,
+                len(ai_result.get("careGaps", [])),
+                len(ai_result.get("recommendedInterventions", [])))
 
     return {
         "memberId": member_id,
         "decisionId": decision_id,
         "sessionId": session_id,
-        "recordsWritten": 1,
+        "recordsWritten": records_written,
         "careGaps": len(ai_result.get("careGaps", [])),
         "interventions": len(ai_result.get("recommendedInterventions", [])),
         "agentResponse": agent_response,
         "status": "success"
     }
+
+
+def clean(record):
+    """Remove empty strings and None values (DynamoDB constraint)."""
+    return {k: v for k, v in record.items() if v != "" and v is not None}
 
 
 def build_chat_response(ai_result):

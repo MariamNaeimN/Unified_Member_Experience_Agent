@@ -2,11 +2,6 @@
 # Outputs
 # =============================================================================
 
-output "api_url" {
-  description = "API Gateway base URL"
-  value       = "${aws_api_gateway_stage.chat_api.invoke_url}"
-}
-
 output "cognito_user_pool_id" {
   description = "Cognito User Pool ID"
   value       = aws_cognito_user_pool.care_managers.id
@@ -20,6 +15,17 @@ output "cognito_client_id" {
 output "cognito_region" {
   description = "Cognito region"
   value       = var.aws_region
+}
+
+# --- WebSocket API ---
+output "websocket_url" {
+  description = "WebSocket API endpoint URL"
+  value       = "${aws_apigatewayv2_stage.websocket.invoke_url}"
+}
+
+output "websocket_connect_command" {
+  description = "Command to test WebSocket connection (replace TOKEN)"
+  value       = "wscat -c '${aws_apigatewayv2_stage.websocket.invoke_url}?token=TOKEN'"
 }
 
 # --- Test commands ---
@@ -36,9 +42,4 @@ output "confirm_command" {
 output "login_command" {
   description = "Command to get auth token"
   value       = "aws cognito-idp initiate-auth --client-id ${aws_cognito_user_pool_client.chat_ui.id} --auth-flow USER_PASSWORD_AUTH --auth-parameters USERNAME=sarah@example.com,PASSWORD=TestPass123"
-}
-
-output "chat_command" {
-  description = "Command to test chat (replace TOKEN)"
-  value       = "curl -X POST ${aws_api_gateway_stage.chat_api.invoke_url}/chat -H 'Authorization: TOKEN' -H 'Content-Type: application/json' -d '{\"memberId\":\"M-10042\",\"message\":\"Tell me about this member\"}'"
 }

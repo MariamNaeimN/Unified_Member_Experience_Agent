@@ -31,6 +31,8 @@ resource "aws_lambda_function" "execute_workflows" {
       SNS_PATIENT_TOPIC_ARN     = aws_sns_topic.patient_notifications.arn
       SNS_CARE_TEAM_TOPIC_ARN   = aws_sns_topic.care_team_alerts.arn
       SNS_PHARMACY_TOPIC_ARN    = aws_sns_topic.pharmacy_alerts.arn
+      COGNITO_USER_POOL_ID      = var.cognito_user_pool_id
+      SENDER_EMAIL              = var.sender_email
       ENVIRONMENT               = var.environment
     }
   }
@@ -63,13 +65,17 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 sns = boto3.client("sns")
+ses = boto3.client("ses")
 dynamodb = boto3.resource("dynamodb")
+cognito = boto3.client("cognito-idp")
 
 TABLE_NAME = os.environ["DYNAMODB_TABLE_NAME"]
 AGENT_TABLE_NAME = os.environ.get("DYNAMODB_AGENT_TABLE_NAME", TABLE_NAME)
 PATIENT_TOPIC = os.environ["SNS_PATIENT_TOPIC_ARN"]
 CARE_TEAM_TOPIC = os.environ["SNS_CARE_TEAM_TOPIC_ARN"]
 PHARMACY_TOPIC = os.environ["SNS_PHARMACY_TOPIC_ARN"]
+COGNITO_USER_POOL_ID = os.environ.get("COGNITO_USER_POOL_ID", "")
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "no-reply@example.com")
 
 # Map intervention types to SNS topics
 TOPIC_MAP = {
@@ -194,6 +200,9 @@ def lambda_handler(event, context):
 
     logger.info("Workflows complete for %s: %d delivered, %d failed", member_id, executed, failed)
 
+    # Send email summary to all Cognito care managers
+    send_email_to_care_managers(member_id, member_name, ai_result, results)
+
     return {
         "memberId": member_id,
         "workflowsExecuted": executed,
@@ -201,6 +210,84 @@ def lambda_handler(event, context):
         "results": results,
         "status": "success" if failed == 0 else "partial"
     }
+
+
+def send_email_to_care_managers(member_id, member_name, ai_result, workflow_results):
+    """Send an email summary of the analysis and triggered actions to all Cognito care managers."""
+    if not COGNITO_USER_POOL_ID:
+        logger.warning("No COGNITO_USER_POOL_ID configured, skipping email")
+        return
+
+    # Get all care manager emails from Cognito
+    emails = []
+    try:
+        response = cognito.list_users(UserPoolId=COGNITO_USER_POOL_ID, Limit=60)
+        for user in response.get("Users", []):
+            for attr in user.get("Attributes", []):
+                if attr["Name"] == "email" and attr.get("Value"):
+                    emails.append(attr["Value"])
+    except Exception as e:
+        logger.error("Failed to list Cognito users: %s", str(e))
+        return
+
+    if not emails:
+        logger.warning("No care manager emails found in Cognito")
+        return
+
+    # Build email body
+    subject = f"[MemberXP] Analysis Complete: {member_name} ({member_id})"
+    risk = ai_result.get("riskAssessment", "N/A")
+    analysis = ai_result.get("analysis", "No analysis available")
+    care_gaps = ai_result.get("careGaps", [])
+    interventions = ai_result.get("recommendedInterventions", [])
+
+    body_parts = []
+    body_parts.append(f"Member Analysis Report: {member_name} ({member_id})")
+    body_parts.append("=" * 60)
+    body_parts.append("")
+    body_parts.append(f"Risk Assessment: {risk}")
+    body_parts.append("")
+    body_parts.append(f"Analysis: {analysis}")
+    body_parts.append("")
+
+    if care_gaps:
+        body_parts.append(f"Care Gaps ({len(care_gaps)}):")
+        for g in care_gaps:
+            body_parts.append(f"  - [{g.get('priority', 'MEDIUM')}] {g.get('type', '')} (Due: {g.get('dueWithin', 'N/A')})")
+        body_parts.append("")
+
+    if interventions:
+        body_parts.append(f"Actions Triggered ({len(interventions)}):")
+        for inv in interventions:
+            body_parts.append(f"  - [{inv.get('type', '')}] {inv.get('message', '')}")
+        body_parts.append("")
+
+    if workflow_results:
+        body_parts.append("Workflow Status:")
+        for r in workflow_results:
+            body_parts.append(f"  - {r['type']}: {r['status']} (Topic: {r.get('topic', 'N/A')})")
+        body_parts.append("")
+
+    body_parts.append("---")
+    body_parts.append("This is an automated notification from the MemberXP AI Care Agent.")
+    body_parts.append(f"Generated at: {datetime.utcnow().isoformat()} UTC")
+
+    body = "\n".join(body_parts)
+
+    # Send to each care manager
+    for email in emails:
+        try:
+            ses.send_email(
+                Source=SENDER_EMAIL,
+                Destination={"ToAddresses": [email]},
+                Message={
+                    "Subject": {"Data": subject},
+                    "Body": {"Text": {"Data": body}}
+                }
+            )
+            logger.info("Email sent to %s for %s", email, member_id)
+        except Exception as e:
+            logger.warning("Failed to send email to %s: %s", email, str(e))
 
 
 def build_notification(member_id, member_name, int_type, target, message, linked_gap):

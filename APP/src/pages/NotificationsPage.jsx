@@ -141,11 +141,30 @@ export default function NotificationsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.notifications().then(data => {
-      setNotifications(data.notifications || []);
-      setUnread(data.unread || 0);
-      setLoading(false);
-    });
+    let cancelled = false;
+    
+    async function loadNotifications() {
+      try {
+        const data = await api.notifications();
+        if (!cancelled) {
+          setNotifications(data.notifications || []);
+          setUnread(data.unread || 0);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error('Notifications error:', err);
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    loadNotifications();
+
+    // Auto-refresh every 10 seconds
+    const interval = setInterval(() => {
+      if (!cancelled) loadNotifications();
+    }, 10000);
+
+    return () => { cancelled = true; clearInterval(interval); };
   }, []);
 
   if (loading) return (

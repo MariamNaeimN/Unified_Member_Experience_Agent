@@ -76,11 +76,30 @@ def lambda_handler(event, context):
 
     logger.info("Analyzing profile for %s (session: %s)", member_id, session_id)
 
+    # Pre-compute claims insight to ensure accuracy (LLM often ignores cost)
+    claims = profile.get("claims", [])
+    sorted_claims = sorted(claims, key=lambda x: x.get("serviceDate", ""), reverse=True)[:10]
+    precomputed_claims_insight = ""
+    if sorted_claims:
+        total_cost = 0
+        er_count = 0
+        for cl in sorted_claims:
+            cost = cl.get("paidAmount", "0")
+            try:
+                total_cost += float(cost)
+            except (ValueError, TypeError):
+                pass
+            if cl.get("claimType") == "Emergency":
+                er_count += 1
+        precomputed_claims_insight = str(len(sorted_claims)) + " claims, " + str(er_count) + " ER visits, total cost $" + "{:,.0f}".format(total_cost)
+    else:
+        precomputed_claims_insight = "No claims on record"
+
     prompt = build_prompt(profile, chat_history, user_message)
 
     # Build messages with chat history for conversation context
     messages = []
-    for ch in chat_history[-5:]:
+    for ch in chat_history[-3:]:
         messages.append({"role": "user", "content": ch.get("userMessage", "")})
         messages.append({"role": "assistant", "content": ch.get("agentResponse", "")})
     messages.append({"role": "user", "content": prompt})
@@ -92,7 +111,7 @@ def lambda_handler(event, context):
         accept="application/json",
         body=json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": 4096,
+            "max_tokens": 2048,
             "temperature": 0.2,
             "messages": messages
         })
@@ -112,6 +131,9 @@ def lambda_handler(event, context):
     logger.info("Bedrock streaming complete: %d chunks, %d chars", chunk_count, len(ai_text))
 
     ai_result = parse_ai_response(ai_text, member_id)
+
+    # Override claimsInsight with pre-computed accurate value
+    ai_result["claimsInsight"] = precomputed_claims_insight
 
     return {
         "memberId": member_id,
@@ -255,36 +277,22 @@ def build_prompt(profile, chat_history=None, user_message=""):
         parts.append("- No care events on record")
     parts.append("")
 
-    parts.append("INSTRUCTIONS:")
-    parts.append("1. Provide a clinical analysis covering claims patterns, care engagement, and medication adherence")
-    parts.append("2. Identify ALL care gaps with priority and clinical protocol")
-    parts.append("3. For EACH care gap, specify a concrete workflow action to trigger:")
-    parts.append("   - SMS: text message to the patient (include exact message text)")
-    parts.append("   - TASK: task for care team member (include who and what)")
-    parts.append("   - ALERT: alert to pharmacy or specialist (include who and what)")
-    parts.append("   - REFERRAL: referral to specialist or program (include details)")
-    parts.append("4. Provide 5 talking points for the care manager next call")
-    parts.append("5. Consider allergies when recommending medication-related actions")
-    parts.append("6. Consider living situation for social determinant risks")
+    parts.append("INSTRUCTIONS: Analyze data, identify care gaps, specify workflow actions (SMS/TASK/ALERT/REFERRAL), provide 3 talking points. Consider allergies and living situation.")
     parts.append("")
-    parts.append('RESPOND IN THIS EXACT JSON FORMAT:')
-    parts.append('{')
-    parts.append('  "analysis": "2-3 sentence clinical summary",')
-    parts.append('  "riskAssessment": "HIGH/MEDIUM/LOW with explanation",')
-    parts.append('  "claimsInsight": "1-2 sentences on claims patterns",')
-    parts.append('  "careHistoryInsight": "1-2 sentences on care engagement",')
-    parts.append('  "medicationInsight": "1-2 sentences on medication adherence",')
-    parts.append('  "careGaps": [')
-    parts.append('    {"type": "gap description", "priority": "CRITICAL/HIGH/MEDIUM/LOW", "protocol": "protocol name", "dueWithin": "timeframe"}')
-    parts.append('  ],')
-    parts.append('  "recommendedInterventions": [')
-    parts.append('    {"type": "SMS/TASK/ALERT/REFERRAL", "target": "patient/care_manager/pharmacy/specialist", "message": "action text", "linkedGap": "gap reference", "system": "SNS/CareManagement/PharmacySystem/ReferralSystem"}')
-    parts.append('  ],')
-    parts.append('  "talkingPoints": ["point 1", "point 2", "point 3", "point 4", "point 5"],')
-    parts.append('  "confidence": 0.0')
-    parts.append('}')
+    parts.append('RESPOND IN THIS EXACT JSON FORMAT (be concise):')
+    parts.append('{"analysis":"2-3 sentence summary","riskAssessment":"HIGH/MEDIUM/LOW with reason","claimsInsight":"X claims, Y ER visits, total cost $Z","careHistoryInsight":"1 sentence","medicationInsight":"1 sentence","careGaps":[{"type":"gap name","priority":"CRITICAL/HIGH/MEDIUM/LOW","protocol":"protocol name","dueWithin":"time frame","details":"REQUIRED - specific details from data","actionItems":["specific action 1","specific action 2"]}],"recommendedInterventions":[{"type":"SMS/TASK/ALERT/REFERRAL","target":"who","message":"text","linkedGap":"gap","system":"system"}],"talkingPoints":["1","2","3"],"confidence":0.0}')
     parts.append("")
-    parts.append("Respond ONLY with valid JSON. No markdown, no explanation outside the JSON.")
+    parts.append("CRITICAL REQUIREMENTS:")
+    parts.append("1. claimsInsight MUST follow this EXACT format: 'X claims, Y ER visits, total cost $Z' - copy the numbers from CLAIMS SUMMARY above")
+    parts.append("2. EVERY care gap MUST have a 'details' field with SPECIFIC data from the member's records")
+    parts.append("3. EVERY care gap MUST have 'actionItems' array with 2-3 specific actions")
+    parts.append("4. For medication gaps: list EXACT medication names and their adherence percentages (e.g., 'Albuterol Inhaler: 71% adherence, Tiotropium Bromide: 65% adherence')")
+    parts.append("5. For missed appointments: include the type and dates")
+    parts.append("6. For conditions: include condition name, severity, and relevant lab values")
+    parts.append("7. DO NOT use generic descriptions like 'Preventive Care' or 'Medication Management' without specific details")
+    parts.append("8. If no specific data supports a care gap, DO NOT include that gap")
+    parts.append("")
+    parts.append("Respond ONLY with valid JSON. No markdown.")
 
     return "\n".join(parts)
 

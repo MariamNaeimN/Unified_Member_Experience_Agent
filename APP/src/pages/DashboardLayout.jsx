@@ -1,9 +1,9 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { MessageSquare, Users, Bell, Heart, LogOut, ChevronRight, Sparkles } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Users, Bell, Heart, LogOut, ChevronRight, Sparkles } from 'lucide-react';
 
 const navItems = [
+  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', desc: 'Member overview' },
   { to: '/chat', icon: MessageSquare, label: 'Chat Agent', desc: 'AI-powered analysis' },
-  { to: '/members', icon: Users, label: 'Members', desc: 'Search & profiles' },
   { to: '/notifications', icon: Bell, label: 'Notifications', desc: 'Workflow alerts' },
 ];
 
@@ -13,7 +13,7 @@ export default function DashboardLayout({ user, onLogout }) {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <aside className="w-72 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 flex flex-col text-white">
+      <aside className="w-72 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 flex flex-col text-white fixed top-0 left-0 h-screen overflow-y-auto z-10">
         {/* Logo */}
         <div className="px-6 py-6">
           <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function DashboardLayout({ user, onLogout }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto ml-72">
         <Outlet />
       </main>
     </div>

@@ -55,3 +55,9 @@ variable "log_retention_days" {
   type    = number
   default = 30
 }
+
+variable "bedrock_model_id" {
+  description = "Bedrock model ID for AI chat analysis"
+  type        = string
+  default     = "anthropic.claude-3-haiku-20240307-v1:0"
+}

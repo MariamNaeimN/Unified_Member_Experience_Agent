@@ -398,5 +398,635 @@
     "status": "Active",
     "severity": "Episodic",
     "lastAssessedDate": "2026-03-25"
+  },
+  {
+    "conditionId": "CND-60200",
+    "memberId": "M-10061",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2020-08-15",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-10"
+  },
+  {
+    "conditionId": "CND-60201",
+    "memberId": "M-10061",
+    "diagnosis": "Hyperlipidemia",
+    "icdCode": "E78.5",
+    "onsetDate": "2021-03-22",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-03-10"
+  },
+  {
+    "conditionId": "CND-60210",
+    "memberId": "M-10062",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.9",
+    "onsetDate": "2023-04-10",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-28"
+  },
+  {
+    "conditionId": "CND-60211",
+    "memberId": "M-10062",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2018-09-15",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-28"
+  },
+  {
+    "conditionId": "CND-60212",
+    "memberId": "M-10062",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2015-06-20",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-28"
+  },
+  {
+    "conditionId": "CND-60220",
+    "memberId": "M-10064",
+    "diagnosis": "Chronic Kidney Disease Stage 4",
+    "icdCode": "N18.4",
+    "onsetDate": "2022-01-15",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-04-01"
+  },
+  {
+    "conditionId": "CND-60221",
+    "memberId": "M-10064",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.23",
+    "onsetDate": "2020-07-20",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-04-01"
+  },
+  {
+    "conditionId": "CND-60222",
+    "memberId": "M-10064",
+    "diagnosis": "Atrial Fibrillation",
+    "icdCode": "I48.91",
+    "onsetDate": "2021-11-05",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-04-01"
+  },
+  {
+    "conditionId": "CND-60223",
+    "memberId": "M-10064",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2010-03-18",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-04-01"
+  },
+  {
+    "conditionId": "CND-60230",
+    "memberId": "M-10065",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2019-05-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-20"
+  },
+  {
+    "conditionId": "CND-60231",
+    "memberId": "M-10065",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2017-08-14",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-20"
+  },
+  {
+    "conditionId": "CND-60240",
+    "memberId": "M-10066",
+    "diagnosis": "Nicotine Dependence",
+    "icdCode": "F17.210",
+    "onsetDate": "2022-09-01",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-01-15"
+  },
+  {
+    "conditionId": "CND-60250",
+    "memberId": "M-10067",
+    "diagnosis": "Chronic Obstructive Pulmonary Disease",
+    "icdCode": "J44",
+    "onsetDate": "2020-02-18",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60251",
+    "memberId": "M-10067",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2017-11-22",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60252",
+    "memberId": "M-10067",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2015-04-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60260",
+    "memberId": "M-10068",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2023-06-20",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-02-10"
+  },
+  {
+    "conditionId": "CND-60270",
+    "memberId": "M-10070",
+    "diagnosis": "Acute on Chronic Systolic Heart Failure",
+    "icdCode": "I50.23",
+    "onsetDate": "2021-05-12",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-03-20"
+  },
+  {
+    "conditionId": "CND-60271",
+    "memberId": "M-10070",
+    "diagnosis": "Chronic Kidney Disease Stage 3",
+    "icdCode": "N18.3",
+    "onsetDate": "2023-02-28",
+    "status": "Active",
+    "severity": "Progressive",
+    "lastAssessedDate": "2026-03-20"
+  },
+  {
+    "conditionId": "CND-60272",
+    "memberId": "M-10070",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2012-07-15",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-20"
+  },
+  {
+    "conditionId": "CND-60280",
+    "memberId": "M-10071",
+    "diagnosis": "Rheumatoid Arthritis",
+    "icdCode": "M06.9",
+    "onsetDate": "2018-10-05",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-15"
+  },
+  {
+    "conditionId": "CND-60281",
+    "memberId": "M-10071",
+    "diagnosis": "Osteoporosis",
+    "icdCode": "M81.0",
+    "onsetDate": "2021-04-18",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-15"
+  },
+  {
+    "conditionId": "CND-60290",
+    "memberId": "M-10072",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2019-12-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-01-28"
+  },
+  {
+    "conditionId": "CND-60291",
+    "memberId": "M-10072",
+    "diagnosis": "Nicotine Dependence",
+    "icdCode": "F17.210",
+    "onsetDate": "2020-03-15",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-01-28"
+  },
+  {
+    "conditionId": "CND-60300",
+    "memberId": "M-10074",
+    "diagnosis": "Chronic Kidney Disease Stage 5",
+    "icdCode": "N18.5",
+    "onsetDate": "2024-06-10",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-04-05"
+  },
+  {
+    "conditionId": "CND-60301",
+    "memberId": "M-10074",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.23",
+    "onsetDate": "2019-08-22",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-04-05"
+  },
+  {
+    "conditionId": "CND-60302",
+    "memberId": "M-10074",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2012-03-15",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-04-05"
+  },
+  {
+    "conditionId": "CND-60303",
+    "memberId": "M-10074",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2008-11-20",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-04-05"
+  },
+  {
+    "conditionId": "CND-60310",
+    "memberId": "M-10075",
+    "diagnosis": "Asthma",
+    "icdCode": "J45.40",
+    "onsetDate": "2015-09-12",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-05"
+  },
+  {
+    "conditionId": "CND-60311",
+    "memberId": "M-10075",
+    "diagnosis": "Generalized Anxiety Disorder",
+    "icdCode": "F41.1",
+    "onsetDate": "2023-01-20",
+    "status": "Active",
+    "severity": "Moderate",
+    "lastAssessedDate": "2026-03-05"
+  },
+  {
+    "conditionId": "CND-60320",
+    "memberId": "M-10076",
+    "diagnosis": "Atherosclerotic Heart Disease",
+    "icdCode": "I25.10",
+    "onsetDate": "2021-03-18",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-22"
+  },
+  {
+    "conditionId": "CND-60321",
+    "memberId": "M-10076",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2018-07-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-22"
+  },
+  {
+    "conditionId": "CND-60322",
+    "memberId": "M-10076",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2014-11-25",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-22"
+  },
+  {
+    "conditionId": "CND-60330",
+    "memberId": "M-10078",
+    "diagnosis": "Chronic Obstructive Pulmonary Disease",
+    "icdCode": "J44",
+    "onsetDate": "2022-04-15",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-28"
+  },
+  {
+    "conditionId": "CND-60331",
+    "memberId": "M-10078",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2019-08-20",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-02-28"
+  },
+  {
+    "conditionId": "CND-60340",
+    "memberId": "M-10079",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.9",
+    "onsetDate": "2021-02-10",
+    "status": "Active",
+    "severity": "Severe",
+    "lastAssessedDate": "2026-04-10"
+  },
+  {
+    "conditionId": "CND-60341",
+    "memberId": "M-10079",
+    "diagnosis": "Chronic Kidney Disease Stage 4",
+    "icdCode": "N18.4",
+    "onsetDate": "2023-09-15",
+    "status": "Active",
+    "severity": "Progressive",
+    "lastAssessedDate": "2026-04-10"
+  },
+  {
+    "conditionId": "CND-60342",
+    "memberId": "M-10079",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2011-05-22",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-04-10"
+  },
+  {
+    "conditionId": "CND-60350",
+    "memberId": "M-10080",
+    "diagnosis": "Seasonal Allergic Rhinitis",
+    "icdCode": "J30.2",
+    "onsetDate": "2023-04-10",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-01-20"
+  },
+  {
+    "conditionId": "CND-60360",
+    "memberId": "M-10081",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2020-11-08",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-12"
+  },
+  {
+    "conditionId": "CND-60361",
+    "memberId": "M-10081",
+    "diagnosis": "Hypothyroidism",
+    "icdCode": "E03.9",
+    "onsetDate": "2018-02-15",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-03-12"
+  },
+  {
+    "conditionId": "CND-60370",
+    "memberId": "M-10082",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.9",
+    "onsetDate": "2022-06-18",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-30"
+  },
+  {
+    "conditionId": "CND-60371",
+    "memberId": "M-10082",
+    "diagnosis": "Atrial Fibrillation",
+    "icdCode": "I48.91",
+    "onsetDate": "2023-01-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-30"
+  },
+  {
+    "conditionId": "CND-60372",
+    "memberId": "M-10082",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2013-09-25",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-30"
+  },
+  {
+    "conditionId": "CND-60380",
+    "memberId": "M-10084",
+    "diagnosis": "Cerebral Infarction (Stroke)",
+    "icdCode": "I63.9",
+    "onsetDate": "2025-11-15",
+    "status": "Active",
+    "severity": "Post-acute",
+    "lastAssessedDate": "2026-03-18"
+  },
+  {
+    "conditionId": "CND-60381",
+    "memberId": "M-10084",
+    "diagnosis": "Atrial Fibrillation",
+    "icdCode": "I48.91",
+    "onsetDate": "2022-05-20",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-18"
+  },
+  {
+    "conditionId": "CND-60382",
+    "memberId": "M-10084",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2014-08-10",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-18"
+  },
+  {
+    "conditionId": "CND-60383",
+    "memberId": "M-10084",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2009-02-28",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-18"
+  },
+  {
+    "conditionId": "CND-60390",
+    "memberId": "M-10085",
+    "diagnosis": "Major Depressive Disorder",
+    "icdCode": "F32.1",
+    "onsetDate": "2024-03-10",
+    "status": "Active",
+    "severity": "Moderate",
+    "lastAssessedDate": "2026-02-25"
+  },
+  {
+    "conditionId": "CND-60400",
+    "memberId": "M-10087",
+    "diagnosis": "Type 2 Diabetes Mellitus",
+    "icdCode": "E11",
+    "onsetDate": "2017-06-15",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-03-08"
+  },
+  {
+    "conditionId": "CND-60401",
+    "memberId": "M-10087",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2015-10-20",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-08"
+  },
+  {
+    "conditionId": "CND-60410",
+    "memberId": "M-10088",
+    "diagnosis": "Nicotine Dependence",
+    "icdCode": "F17.210",
+    "onsetDate": "2020-04-15",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-01-22"
+  },
+  {
+    "conditionId": "CND-60420",
+    "memberId": "M-10089",
+    "diagnosis": "Rheumatoid Arthritis",
+    "icdCode": "M06.9",
+    "onsetDate": "2019-07-22",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60421",
+    "memberId": "M-10089",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2020-11-10",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60430",
+    "memberId": "M-10090",
+    "diagnosis": "Congestive Heart Failure",
+    "icdCode": "I50.9",
+    "onsetDate": "2022-03-15",
+    "status": "Active",
+    "severity": "Uncontrolled",
+    "lastAssessedDate": "2026-04-02"
+  },
+  {
+    "conditionId": "CND-60431",
+    "memberId": "M-10090",
+    "diagnosis": "Chronic Kidney Disease Stage 3",
+    "icdCode": "N18.3",
+    "onsetDate": "2023-08-20",
+    "status": "Active",
+    "severity": "Progressive",
+    "lastAssessedDate": "2026-04-02"
+  },
+  {
+    "conditionId": "CND-60432",
+    "memberId": "M-10090",
+    "diagnosis": "Essential Hypertension",
+    "icdCode": "I10",
+    "onsetDate": "2011-12-05",
+    "status": "Active",
+    "severity": "Managed",
+    "lastAssessedDate": "2026-04-02"
+  },
+  {
+    "conditionId": "CND-60440",
+    "memberId": "M-10063",
+    "diagnosis": "Seasonal Allergic Rhinitis",
+    "icdCode": "J30.2",
+    "onsetDate": "2023-03-10",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-03-15"
+  },
+  {
+    "conditionId": "CND-60450",
+    "memberId": "M-10069",
+    "diagnosis": "Vitamin D Deficiency",
+    "icdCode": "E55.9",
+    "onsetDate": "2024-06-15",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-03-20"
+  },
+  {
+    "conditionId": "CND-60460",
+    "memberId": "M-10073",
+    "diagnosis": "Iron Deficiency Anemia",
+    "icdCode": "D50.9",
+    "onsetDate": "2024-01-10",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-02-25"
+  },
+  {
+    "conditionId": "CND-60470",
+    "memberId": "M-10077",
+    "diagnosis": "Well Adult Examination",
+    "icdCode": "Z00.00",
+    "onsetDate": "2025-02-01",
+    "status": "Active",
+    "severity": "Healthy",
+    "lastAssessedDate": "2026-04-01"
+  },
+  {
+    "conditionId": "CND-60480",
+    "memberId": "M-10083",
+    "diagnosis": "Low Back Pain",
+    "icdCode": "M54.5",
+    "onsetDate": "2024-09-15",
+    "status": "Active",
+    "severity": "Controlled",
+    "lastAssessedDate": "2026-03-10"
+  },
+  {
+    "conditionId": "CND-60490",
+    "memberId": "M-10086",
+    "diagnosis": "Well Adult Examination",
+    "icdCode": "Z00.00",
+    "onsetDate": "2024-06-01",
+    "status": "Active",
+    "severity": "Healthy",
+    "lastAssessedDate": "2026-02-15"
+  },
+  {
+    "conditionId": "CND-60500",
+    "memberId": "M-10091",
+    "diagnosis": "Well Adult Examination",
+    "icdCode": "Z00.00",
+    "onsetDate": "2025-03-01",
+    "status": "Active",
+    "severity": "Healthy",
+    "lastAssessedDate": "2026-03-28"
   }
 ]
